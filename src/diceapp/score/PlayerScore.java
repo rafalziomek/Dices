@@ -30,9 +30,8 @@ public class PlayerScore {
 	}
 	
 	public void saveScore(StrategyType strategyType, List<DiceResult> result) {
-		boolean isFirstStrategy = Arrays.stream(StrategyType.firstTableStrategies()).anyMatch(p -> p == strategyType);
 		Strategy strategy = strategyFactory.getStrategy(strategyType);
-		if(isFirstStrategy) {
+		if(isFirstStrategy(strategyType)) {
 			FirstTableStrategy firstTableStrategy = (FirstTableStrategy) strategy;
 			saveFirstTableScore(firstTableStrategy, result);
 		}
@@ -41,8 +40,15 @@ public class PlayerScore {
 			saveSecondTableScore(secondTableStrategy, result);
 		}
 	}
+	
+	private boolean isFirstStrategy(StrategyType strategyType) {
+		return Arrays
+				.stream(StrategyType.firstTableStrategies())
+				.anyMatch(p -> p == strategyType);
+	}
+	
 	private void saveFirstTableScore(FirstTableStrategy strategy, List<DiceResult> result) {
-		if(!matchClass(strategy)) {
+		if(!strategyIsUsed(strategy)) {
 			firstTableScore += strategy.getPoints(result);
 			lastPoints = strategy.getPoints(result);
 			usedStrategy.put(strategy, true);
@@ -53,7 +59,7 @@ public class PlayerScore {
 	}
 	
 	private void saveSecondTableScore(SecondTableStrategy strategy, List<DiceResult> result) {
-		if(!matchClass(strategy)) {
+		if(!strategyIsUsed(strategy)) {
 			secondTableScore += strategy.getPoints(result);
 			lastPoints = strategy.getPoints(result);
 			usedStrategy.put(strategy, true);
@@ -64,7 +70,7 @@ public class PlayerScore {
 		return lastPoints;
 	}
 	
-	private boolean matchClass(Strategy strategy) {
+	private boolean strategyIsUsed(Strategy strategy) {
 		return usedStrategy.keySet()
 				.stream()
 				.anyMatch(p -> p.getClass() == strategy.getClass());

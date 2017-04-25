@@ -29,7 +29,7 @@ public class MoveController {
 		numberOfRolls++;
 	}
 	
-	public void moveIsDone() {
+	public void endOfMove() {
 		numberOfRolls = 0;
 		moveCounter++;
 		int playerOnMoveIndex = moveCounter % numberOfPlayers;

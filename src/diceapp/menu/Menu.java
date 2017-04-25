@@ -44,7 +44,7 @@ public class Menu {
 	private Node[] createChildrens() {
 		playersTextLabel = new Label("Iloœæ graczy:");
 		
-		choiceBox = getNumberOfPlayersCheckBox();
+		choiceBox = getNumberOfPlayersChoiceBox();
 		choiceBox.getSelectionModel().selectFirst();
 		
 		startButton = getStartButton();
@@ -54,7 +54,7 @@ public class Menu {
 		return childrens;
 	}
 	
-	private ChoiceBox<Integer> getNumberOfPlayersCheckBox() {
+	private ChoiceBox<Integer> getNumberOfPlayersChoiceBox() {
 		return new ChoiceBox<Integer>(FXCollections.observableArrayList(
 			    2,3,4));
 	}

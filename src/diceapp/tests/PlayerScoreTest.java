@@ -11,7 +11,10 @@ import org.junit.Test;
 import diceapp.diceModel.DiceResult;
 import diceapp.player.Player;
 import diceapp.score.PlayerScore;
+import diceapp.strategies.Strategy;
 import diceapp.strategies.StrategyType;
+import diceapp.strategies.firstTableStrategies.FirstTableThreeStrategy;
+import diceapp.strategies.secondTableStrategies.staticStrategies.SecondTableGeneralStrategy;
 
 public class PlayerScoreTest {
 	private Player player;

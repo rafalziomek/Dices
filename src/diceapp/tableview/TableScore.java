@@ -1,44 +1,43 @@
 package diceapp.tableview;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import diceapp.controllers.MoveController;
 import diceapp.diceModel.DiceContainer;
 import diceapp.score.PlayerScore;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.GridPane;
 
 public class TableScore {
 	private GridPane table;
-	private GridPane firstTable;
-	private List<TableScoreController> controllers;
-	
-	public TableScore(List<PlayerScore> score, MoveController move, DiceContainer diceContainer) {
-		
+	private GridPane firstColumn;
+	private List<TableColumn> controllers;
+	public TableScore(List<PlayerScore> score, MoveController moveController, DiceContainer diceContainer) {
 		table = new GridPane();
-		controllers = new ArrayList<TableScoreController>();
-		loadFXML();
-		table.addColumn(1, firstTable);
+		controllers = new ArrayList<TableColumn>();
+		initializeFirstColumn();
+		initializeScoreColumns(score, moveController, diceContainer);
+		table.gridLinesVisibleProperty().set(true);
+	}
+	
+	private void initializeFirstColumn() {
+		TableColumn firstTableColumn = new TableFirstColumn();
+		firstColumn = firstTableColumn.getTable();
+		table.addColumn(1, firstColumn);
+	}
+	
+	private void initializeScoreColumns(List<PlayerScore> score, 
+			MoveController moveController, DiceContainer diceContainer) {
 		for(int i = 2; i < 2 + score.size(); i++) {
-			controllers.add(new TableScoreController(score.get(i - 2),move, diceContainer));
+			TableColumn column = new TableScoreColumn(score.get(i - 2),moveController, diceContainer);
+			controllers.add(column);
 			table.addColumn(i, controllers.get(i-2).getTable());
 		}
-		table.gridLinesVisibleProperty().set(true);
 	}
 	
 	public GridPane getTable() {
 		return table;
 	}
 	
-	private void loadFXML() {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/firstColumnScore.fxml"));
-				        fxmlLoader.setController(this);
-				        try {
-				            firstTable = fxmlLoader.load();
-				        } catch (IOException exception) {
-				            throw new RuntimeException(exception);
-				        }
-	}
+	
 }
