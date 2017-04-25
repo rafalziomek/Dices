@@ -2,6 +2,7 @@ package diceapp.controllers;
 
 import diceapp.diceModel.DiceContainer;
 import diceapp.dicesView.DiceContainerView;
+import javafx.scene.layout.GridPane;
 public class DiceContainerController {
 	private final DiceContainerView diceContainerView;
 	private final DiceContainer diceContainer;
@@ -38,7 +39,7 @@ public class DiceContainerController {
 		diceContainerView.updateDiceView(diceContainer.getTopOfDices());
 	}
 	
-	public DiceContainerView getView() {
-		return diceContainerView;
+	public GridPane getDiceResultView() {
+		return diceContainerView.getDiceResultView();
 	}
 }

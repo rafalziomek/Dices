@@ -13,13 +13,12 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			
 			Menu menu = new Menu(primaryStage);
 			Scene scene = menu.buildMenu();
-			
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			

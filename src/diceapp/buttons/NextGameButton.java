@@ -1,23 +1,26 @@
 package diceapp.buttons;
 
+import diceapp.game.Game;
 import diceapp.game.GameCreator;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class StartGameButton extends Button {
+public class NextGameButton extends Button {
 
-	public StartGameButton(Stage primaryStage, int numberOfPlayers) {
+	public NextGameButton(Game lastGame, Stage winnerWindowStage) {
 		this.textProperty().set("Start!");
-		
-		GameCreator gameCreator = new GameCreator(primaryStage, numberOfPlayers);
+		Stage primaryStage = new Stage();
+		GameCreator gameCreator = new GameCreator(primaryStage, 
+				lastGame.getNumberOfPlayers());
 		
 		this.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override 
 		    public void handle(ActionEvent e) {
 		    	gameCreator.create();
-		    	
+		    	lastGame.close();
+		    	winnerWindowStage.close();
 		    }
 		});
 	}

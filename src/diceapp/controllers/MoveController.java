@@ -1,5 +1,7 @@
 package diceapp.controllers;
 
+import diceapp.game.Game;
+import diceapp.game.GameOver;
 import diceapp.labels.PlayerOnMoveLabel;
 import diceapp.player.Player;
 
@@ -12,13 +14,18 @@ public class MoveController {
 	private int numberOfRolls;
 	private PlayerOnMoveLabel playerRoundLabel;
 	private DiceContainerController diceContainerController;
+	private Game game;
+	private final int maximumNumberOfMoves;
 	
-	public MoveController(Player[] players, DiceContainerController diceContainerController) {
+	public MoveController(Player[] players, DiceContainerController diceContainerController, Game game) {
 		this.players = players;
 		this.diceContainerController = diceContainerController;
+		this.game = game;
 		moveCounter = 0;
+		
 		playerOnMove = players[moveCounter];
 		this.numberOfPlayers = players.length;
+		maximumNumberOfMoves = numberOfPlayers * 13;
 	}
 	public boolean playerCanRoll() {
 		return numberOfRolls < 2;
@@ -29,7 +36,7 @@ public class MoveController {
 		numberOfRolls++;
 	}
 	
-	public void endOfMove() {
+	public void move() {
 		numberOfRolls = 0;
 		moveCounter++;
 		int playerOnMoveIndex = moveCounter % numberOfPlayers;
@@ -37,6 +44,17 @@ public class MoveController {
 		playerRoundLabel.setPlayerOnMove(playerOnMove);
 		diceContainerController.isFirstMove();
 		diceContainerController.rollAllDices();
+		if(isEndOfGame()) {
+			endGame();
+		}
+	}
+	
+	private void endGame() {
+		GameOver gameOver = new GameOver(game);
+		gameOver.endOfGame();
+	}
+	public boolean isEndOfGame() {
+		return moveCounter == maximumNumberOfMoves;
 	}
 	
 	public void setPlayerRoundLabel(PlayerOnMoveLabel label) {

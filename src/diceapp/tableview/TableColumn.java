@@ -3,16 +3,16 @@ package diceapp.tableview;
 import javafx.scene.layout.GridPane;
 
 public abstract class TableColumn {
-	private GridPane table;
+	private GridPane column;
 	
 	public TableColumn(String filePath) {
 		Loader loader = new Loader(this, filePath);
 		loader.loadFXML();
-		table = loader.getColumn();
+		column = loader.getColumn();
 	}
 	
-	public GridPane getTable() {
-		return table;
+	public GridPane getColumnView() {
+		return column;
 	}
 
 }

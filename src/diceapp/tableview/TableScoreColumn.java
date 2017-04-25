@@ -12,67 +12,72 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
-public class TableScoreColumn extends TableColumn{
-	 @FXML
-	    private Label playerName;
+public class TableScoreColumn extends TableColumn {
+	
+	@FXML
+	private Label playerName;
 
-	    @FXML
-	    private CheckBox playerOnes;
+	@FXML
+	private CheckBox playerOnes;
 
-	    @FXML
-	    private CheckBox playerTwos;
+	@FXML
+	private CheckBox playerTwos;
+	
+	@FXML
+	private CheckBox playerThrees;
 
-	    @FXML
-	    private CheckBox playerThrees;
+    @FXML
+    private CheckBox playerFours;
 
-	    @FXML
-	    private CheckBox playerFours;
+    @FXML
+    private CheckBox playerFives;
 
-	    @FXML
-	    private CheckBox playerFives;
+    @FXML
+    private CheckBox playerSixes;
 
-	    @FXML
-	    private CheckBox playerSixes;
+    @FXML
+    private Label firstTableScore;
 
-	    @FXML
-	    private Label firstTableScore;
+    @FXML
+    private CheckBox playerThreeSame;
 
-	    @FXML
-	    private CheckBox playerThreeSame;
+    @FXML
+    private CheckBox playerFourSame;
 
-	    @FXML
-	    private CheckBox playerFourSame;
+    @FXML
+    private CheckBox playerFull;
 
-	    @FXML
-	    private CheckBox playerFull;
+    @FXML
+    private CheckBox playerSmallStraight;
 
-	    @FXML
-	    private CheckBox playerSmallStraight;
+    @FXML
+    private CheckBox playerBigStraight;
 
-	    @FXML
-	    private CheckBox playerBigStraight;
+    @FXML
+    private CheckBox playerGeneral;
 
-	    @FXML
-	    private CheckBox playerGeneral;
+    @FXML
+    private CheckBox playerChance;
 
-	    @FXML
-	    private CheckBox playerChance;
+    @FXML
+    private Label secondTableScore;
 
-	    @FXML
-	    private Label secondTableScore;
-
-	    @FXML
-	    private Label tableScore;
+    @FXML
+    private Label tableScore;
 	    
 	private PlayerScore playerScore;
-	private MoveController move;
+	private MoveController moveController;
 	private DiceContainer diceContainer;
+	
 	public TableScoreColumn(PlayerScore playerScore, MoveController move, DiceContainer diceContainer) {
 		super("resources/playerScore.fxml");
-		this.move = move;
+		
+		this.moveController = move;
 		this.playerScore = playerScore;
 		this.diceContainer = diceContainer;
-		playerName.setText("#" + playerScore.getTableScoreId());
+		
+		setColumnHeader();
+		
 		initializeListeners();
 	}
 	
@@ -92,15 +97,15 @@ public class TableScoreColumn extends TableColumn{
 	}
 	
 	private boolean thisPlayerIsOnMove() {
-		return playerScore.getTableScoreId() == move.getPlayerOnMove().getId();
+		return this.playerScore.getTableScoreId() == this.moveController.getPlayerOnMove().getId();
 	}
 	
 	private void acceptMove(CheckBox checkBox, StrategyType strategy) {
 		checkBox.setDisable(true);
 		saveScore(strategy);
         updateViewScore(checkBox);
-        updateScores(playerScore);
-        move.endOfMove();
+        updateScores(this.playerScore);
+        this.moveController.move();
 	}
 	
 	private void dontAcceptMove(CheckBox checkBox) {
@@ -108,17 +113,21 @@ public class TableScoreColumn extends TableColumn{
 	}
 	
 	private void saveScore(StrategyType strategy) {
-		playerScore.saveScore(strategy, diceContainer.getTopOfDices());
+		this.playerScore.saveScore(strategy, this.diceContainer.getTopOfDices());
 	}
 	
 	private void updateViewScore(CheckBox checkBox) {
-		checkBox.setText(Integer.toString(playerScore.getLastScore()));
+		checkBox.setText(Integer.toString(this.playerScore.getLastScore()));
 	}
 	
 	private void updateScores(PlayerScore playerScore) {
 		firstTableScore.setText(Integer.toString(playerScore.getFirstTableScore()));
         secondTableScore.setText(Integer.toString(playerScore.getSecondTableScore()));
         tableScore.setText(Integer.toString(playerScore.getScore()));
+	}
+	
+	private void setColumnHeader() {
+		playerName.setText("#" + playerScore.getTableScoreId());
 	}
 	
 	private void initializeListeners() {

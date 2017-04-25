@@ -11,19 +11,24 @@ import diceapp.player.Player;
 import diceapp.score.PlayerScore;
 import diceapp.tableview.TableScore;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class Game {
 	private final Player[] players;
 	private final List<PlayerScore> playerScores;
 	private final BorderPane gameWindow;
-	private final TableScore tableScore;
+	private final GridPane tableScore;
 	private final DiceContainerController diceContainerController;
 	private final GameWindowBuilder gameWindowBuilder;
 	private final MoveController moveController;
 	private final DiceContainer diceContainer;
 	private final DiceContainerView diceContainerView;
-	public Game(int numberOfPlayers) {
+	
+	private Stage primaryStage;
+	public Game(int numberOfPlayers, Stage primaryStage) {
 		
+		this.primaryStage = primaryStage;
 		players = initializePlayers(numberOfPlayers);
 		playerScores = initializePlayerScores(players);
 		
@@ -33,22 +38,27 @@ public class Game {
 		diceContainerController = 
 				new DiceContainerController(diceContainerView, diceContainer);
 		
-		moveController = new MoveController(players, diceContainerController);
+		moveController = new MoveController(players, diceContainerController, this);
 		
 		tableScore = new TableScore(playerScores, moveController, diceContainer);
 		
 		diceContainerController.rollAllDices();
+		
 		gameWindowBuilder = new GameWindowBuilder(diceContainerController, tableScore, moveController);
 		
 		gameWindow = gameWindowBuilder.buildGameWindow();
 		
 	}	
-
+	public int getNumberOfPlayers() {
+		return players.length;
+	}
 	
 	public BorderPane getGameWindow() {
 		return gameWindow;
 	}
-	
+	public void close() {
+		primaryStage.close();
+	}
 	private Player[] initializePlayers(int numberOfPlayers) {
 		Player[] players = new Player[numberOfPlayers];
 		for(int i = 0; i < numberOfPlayers; i++) {
@@ -63,5 +73,11 @@ public class Game {
 			playersScore.add(new PlayerScore(players[i]));
 		}
 		return playersScore;
+	}
+	
+	public int getWinnerId() {
+		playerScores.sort((x,y) -> y.getScore() - x.getScore());
+		int winnerId = playerScores.get(0).getTableScoreId();
+		return winnerId;
 	}
 }

@@ -8,7 +8,7 @@ public class GameCreator {
 	private Game game;
 	private Stage primaryStage;
 	public GameCreator(Stage primaryStage, int numberOfPlayers) {
-	    game = new Game(numberOfPlayers);
+	    game = new Game(numberOfPlayers, primaryStage);
 	    this.primaryStage = primaryStage;
 	}
 	
@@ -17,5 +17,9 @@ public class GameCreator {
 		Scene scene = new Scene(gameWindow);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+	}
+	
+	public void close() {
+		primaryStage.close();
 	}
 }

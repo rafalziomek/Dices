@@ -3,7 +3,6 @@ package diceapp.game;
 import diceapp.buttons.RollDiceButton;
 import diceapp.controllers.DiceContainerController;
 import diceapp.controllers.MoveController;
-import diceapp.dicesView.DiceContainerView;
 import diceapp.labels.PlayerOnMoveLabel;
 import diceapp.tableview.TableScore;
 import javafx.geometry.Insets;
@@ -11,32 +10,31 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 public class GameWindowBuilder {
 	private BorderPane gameWindow;
-	private TableScore scoreTable;
-	private DiceContainerView diceContainerView;
+	private GridPane scoreTable;
+	private GridPane diceResultView;
 	private Button rollDiceButton;
 	private Label playerOnMoveLabel;
 	private MoveController moveController;
 	
-	public GameWindowBuilder(DiceContainerController diceContainerController, TableScore table, MoveController move) {
+	public GameWindowBuilder(DiceContainerController diceContainerController, GridPane tableScore, MoveController move) {
 		gameWindow = new BorderPane();
-		this.diceContainerView = diceContainerController.getView();
-		this.scoreTable = table;
+		this.diceResultView = diceContainerController.getDiceResultView();
+		this.scoreTable = tableScore;
 		this.moveController = move;
 	}
 	public BorderPane buildGameWindow() {
 		playerOnMoveLabel = new PlayerOnMoveLabel(moveController);
-		rollDiceButton = getRollDiceButton();
 		
-		StackPane.setAlignment(diceContainerView.getDiceView(), Pos.CENTER);
-		StackPane.setAlignment(rollDiceButton, Pos.CENTER);
+		rollDiceButton = getRollDiceButton();
 		
 		StackPane gameTable = getGameTable();
 		
-		gameWindow.setLeft(scoreTable.getTable());
+		gameWindow.setLeft(scoreTable);
 		gameWindow.setCenter(gameTable);
 		gameWindow.setTop(playerOnMoveLabel);
 		
@@ -48,8 +46,11 @@ public class GameWindowBuilder {
 		
 		stackPane.setPadding(new Insets(100,10,100,10));
 		
-		stackPane.getChildren().add(diceContainerView.getDiceView());
+		stackPane.getChildren().add(diceResultView);
 		stackPane.getChildren().add(rollDiceButton);
+		
+		StackPane.setAlignment(diceResultView, Pos.CENTER);
+		StackPane.setAlignment(rollDiceButton, Pos.CENTER);
 		
 		return stackPane;
 	}

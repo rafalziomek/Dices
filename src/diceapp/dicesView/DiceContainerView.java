@@ -80,7 +80,7 @@ public class DiceContainerView {
 		return selected;
 	}
 	
-	public GridPane getDiceView() {
+	public GridPane getDiceResultView() {
 		return gameTable;
 	}
 }

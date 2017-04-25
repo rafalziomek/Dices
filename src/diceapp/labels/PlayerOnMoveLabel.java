@@ -19,6 +19,6 @@ public class PlayerOnMoveLabel extends Label{
 	}
 	
 	public void setPlayerOnMove(Player player) {
-		this.setText("Ruch gracza: " + player.getId());
+		this.setText("Ruch gracza: #" + player.getId());
 	}
 }
