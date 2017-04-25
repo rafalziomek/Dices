@@ -60,12 +60,8 @@ public class Menu {
 	}
 	
 	private Button getStartButton() {
-		Button button = new StartGameButton(primaryStage, getChoosedNumberOfPlayers());
+		Button button = new StartGameButton(primaryStage, choiceBox);
 		return button;
-	}
-	
-	private int getChoosedNumberOfPlayers() {
-		return choiceBox.getSelectionModel().getSelectedItem();
 	}
 	
 	private void setPositionChildren() {

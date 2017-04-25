@@ -24,7 +24,7 @@ public class GameOver {
 		
 		Stage nextGameStage = new Stage();
 		StackPane gameOverWindow = createGameOverWindow(nextGameStage);
-		Scene scene = new Scene(gameOverWindow, 200, 100);
+		Scene scene = new Scene(gameOverWindow, 100, 100);
 		nextGameStage.setScene(scene);
 		nextGameStage.show();
 	}
@@ -32,11 +32,13 @@ public class GameOver {
 	private StackPane createGameOverWindow(Stage stage) {
 		StackPane gameOverWindow = new StackPane();
 		Label label = new Label("Wygra³ gracz #" + winnerId + "!");
+		Label label1 = new Label("Czy chcesz rozpocz¹æ now¹ gre?");
 		Button button = new NextGameButton(game, stage);
 		StackPane.setAlignment(label, Pos.TOP_CENTER);
 		StackPane.setAlignment(button, Pos.BOTTOM_CENTER);
-		
+		StackPane.setAlignment(label1, Pos.CENTER);
 		gameOverWindow.getChildren().add(label);
+		gameOverWindow.getChildren().add(label1);
 		gameOverWindow.getChildren().add(button);
 		return gameOverWindow;
 	}
