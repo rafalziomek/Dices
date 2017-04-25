@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="100.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+  <columnConstraints>
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label fx:id="playerName" text="0" />
+      <CheckBox fx:id="playerOnes" mnemonicParsing="false" text="0" GridPane.rowIndex="1" />
+      <CheckBox fx:id="playerTwos" mnemonicParsing="false" text="0" GridPane.rowIndex="2" />
+      <CheckBox fx:id="playerThrees" mnemonicParsing="false" text="0" GridPane.rowIndex="3" />
+      <CheckBox fx:id="playerFours" mnemonicParsing="false" text="0" GridPane.rowIndex="4" />
+      <CheckBox fx:id="playerFives" mnemonicParsing="false" text="0" GridPane.rowIndex="5" />
+      <CheckBox fx:id="playerSixes" mnemonicParsing="false" text="0" GridPane.rowIndex="6" />
+      <Label fx:id="firstTableScore" text="0" GridPane.rowIndex="7" />
+      <CheckBox fx:id="playerThreeSame" mnemonicParsing="false" text="0" GridPane.rowIndex="8" />
+      <CheckBox fx:id="playerFourSame" mnemonicParsing="false" text="0" GridPane.rowIndex="9" />
+      <CheckBox fx:id="playerFull" mnemonicParsing="false" text="0" GridPane.rowIndex="10" />
+      <CheckBox fx:id="playerSmallStraight" mnemonicParsing="false" text="0" GridPane.rowIndex="11" />
+      <CheckBox fx:id="playerBigStraight" mnemonicParsing="false" text="0" GridPane.rowIndex="12" />
+      <CheckBox fx:id="playerGeneral" mnemonicParsing="false" text="0" GridPane.rowIndex="13" />
+      <CheckBox fx:id="playerChance" mnemonicParsing="false" text="0" GridPane.rowIndex="14" />
+      <Label fx:id="secondTableScore" text="0" GridPane.rowIndex="15" />
+      <Label fx:id="tableScore" text="0" GridPane.rowIndex="16" />
+   </children>
+</GridPane>
