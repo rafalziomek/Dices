@@ -21,7 +21,6 @@ public class DiceContainerController {
 		 } else {
 			 nextRoll();
 		 }
-		
 	}
 	
 	public void isFirstMove() {

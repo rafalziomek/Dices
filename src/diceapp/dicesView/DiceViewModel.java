@@ -8,28 +8,26 @@ import javafx.scene.image.ImageView;
 
 public class DiceViewModel {
 	
-	private DiceView[] diceViews;
-	private DiceView one;
-	private DiceView two;
-	private DiceView three;
-	private DiceView four;
-	private DiceView five;
-	private DiceView six;
+	private final DiceView[] diceViews;
+	private final DiceView one;
+	private final DiceView two;
+	private final DiceView three;
+	private final DiceView four;
+	private final DiceView five;
+	private final DiceView six;
 	
-	private DiceView oneSelected;
-	private DiceView twoSelected;
-	private DiceView threeSelected;
-	private DiceView fourSelected;
-	private DiceView fiveSelected;
-	private DiceView sixSelected;
-	
+	private final DiceView oneSelected;
+	private final DiceView twoSelected;
+	private final DiceView threeSelected;
+	private final DiceView fourSelected;
+	private final DiceView fiveSelected;
+	private final DiceView sixSelected;
 	
 	private DiceView thisView;
 	
 	private boolean isSelected;
 	
 	private DiceContainerView parentContainerView;
-	
 	
 	public DiceViewModel(DiceContainerView parent) {
 		this.parentContainerView = parent;
@@ -77,31 +75,7 @@ public class DiceViewModel {
 			setSelectedImage(result);
 		}
 		else {
-			setNormalImage(result);
-		}
-	}
-	
-	private void setNormalImage(DiceResult result) {
-		isSelected = false;
-		switch(result) {
-		case One:
-				thisView = one;
-				break;
-		case Two:
-				thisView = two;
-				break;
-		case Three:
-				thisView = three;
-				break;
-		case Four:
-				thisView = four;
-				break;
-		case Five:
-				thisView = five;
-				break;
-		case Six:
-				thisView = six;
-				break;
+			setUnselectedImage(result);
 		}
 	}
 	
@@ -127,6 +101,49 @@ public class DiceViewModel {
 				thisView = sixSelected;
 				break;
 		}
+	}
+	
+	private void setUnselectedImage(DiceResult result) {
+		isSelected = false;
+		switch(result) {
+		case One:
+				thisView = one;
+				break;
+		case Two:
+				thisView = two;
+				break;
+		case Three:
+				thisView = three;
+				break;
+		case Four:
+				thisView = four;
+				break;
+		case Five:
+				thisView = five;
+				break;
+		case Six:
+				thisView = six;
+				break;
+		}
+	}
+	
+	private void setViewsHandlers() {
+		IntStream
+		.range(0, diceViews.length)
+		.forEach(i -> setSelectViewHandler(diceViews[i]));
+	}
+	
+	private void setSelectViewHandler(DiceView diceView) {
+		ImageView imgView = diceView.getImageView();
+		imgView.setOnMouseClicked(event -> {
+			if(isSelected) {
+	        	 unselect();
+	         } 
+	         else {
+	        	 select();
+	         }
+			parentContainerView.refreshView();
+		});
 	}
 	
 	private void select() {
@@ -163,22 +180,5 @@ public class DiceViewModel {
 		}
 	}
 	
-	private void setViewsHandlers() {
-		IntStream
-		.range(0, diceViews.length)
-		.forEach(i -> setSelectViewHandler(diceViews[i]));
-	}
 	
-	private void setSelectViewHandler(DiceView diceView) {
-		ImageView imgView = diceView.getImageView();
-		imgView.setOnMouseClicked(event -> {
-			if(isSelected) {
-	        	 unselect();
-	         } 
-	         else {
-	        	 select();
-	         }
-			parentContainerView.refreshView();
-		});
-	}
 }

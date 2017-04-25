@@ -9,14 +9,14 @@ import diceapp.diceModel.DiceContainer;
 import diceapp.dicesView.DiceContainerView;
 import diceapp.player.Player;
 import diceapp.score.PlayerScore;
-import diceapp.tableview.Table;
+import diceapp.tableview.TableScore;
 import javafx.scene.layout.BorderPane;
 
 public class Game {
 	private final Player[] players;
 	private final List<PlayerScore> playerScores;
 	private final BorderPane gameWindow;
-	private final Table tableScore;
+	private final TableScore tableScore;
 	private final DiceContainerController diceContainerController;
 	private final GameWindowBuilder gameWindowBuilder;
 	private final MoveController moveController;
@@ -35,13 +35,12 @@ public class Game {
 		
 		moveController = new MoveController(players, diceContainerController);
 		
-		tableScore = new Table(playerScores, moveController, diceContainer);
+		tableScore = new TableScore(playerScores, moveController, diceContainer);
 		
 		diceContainerController.rollAllDices();
 		gameWindowBuilder = new GameWindowBuilder(diceContainerController, tableScore, moveController);
 		
 		gameWindow = gameWindowBuilder.buildGameWindow();
-		gameWindowBuilder.setLabelPlayer(moveController.getPlayerOnMove());
 		
 	}	
 

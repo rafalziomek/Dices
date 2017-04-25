@@ -5,8 +5,7 @@ import diceapp.controllers.DiceContainerController;
 import diceapp.controllers.MoveController;
 import diceapp.dicesView.DiceContainerView;
 import diceapp.labels.PlayerOnMoveLabel;
-import diceapp.player.Player;
-import diceapp.tableview.Table;
+import diceapp.tableview.TableScore;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -16,33 +15,30 @@ import javafx.scene.layout.StackPane;
 
 public class GameWindowBuilder {
 	private BorderPane gameWindow;
-	private Table table;
+	private TableScore scoreTable;
 	private DiceContainerView diceContainerView;
-	private Button button;
-	private Label label;
+	private Button rollDiceButton;
+	private Label playerOnMoveLabel;
 	private MoveController moveController;
 	
-	public GameWindowBuilder(DiceContainerController diceContainerController, Table table, MoveController move) {
+	public GameWindowBuilder(DiceContainerController diceContainerController, TableScore table, MoveController move) {
 		gameWindow = new BorderPane();
 		this.diceContainerView = diceContainerController.getView();
-		this.table = table;
+		this.scoreTable = table;
 		this.moveController = move;
-		button = setRollDiceButton();
-		label = new PlayerOnMoveLabel(moveController);
 	}
 	public BorderPane buildGameWindow() {
-		BorderPane.setAlignment(label, Pos.CENTER);
-		StackPane stackPane = getGameTable();
+		playerOnMoveLabel = new PlayerOnMoveLabel(moveController);
+		rollDiceButton = getRollDiceButton();
 		
-		
-		label.setPadding(new Insets(10,10,10,10));
-		label.setScaleX(1.2);
-		label.setScaleY(1.2);
 		StackPane.setAlignment(diceContainerView.getDiceView(), Pos.CENTER);
-		StackPane.setAlignment(button, Pos.CENTER);
-		gameWindow.setLeft(table.getTable());
-		gameWindow.setCenter(stackPane);
-		gameWindow.setTop(label);
+		StackPane.setAlignment(rollDiceButton, Pos.CENTER);
+		
+		StackPane gameTable = getGameTable();
+		
+		gameWindow.setLeft(scoreTable.getTable());
+		gameWindow.setCenter(gameTable);
+		gameWindow.setTop(playerOnMoveLabel);
 		
 		return gameWindow;
 	}
@@ -53,16 +49,12 @@ public class GameWindowBuilder {
 		stackPane.setPadding(new Insets(100,10,100,10));
 		
 		stackPane.getChildren().add(diceContainerView.getDiceView());
-		stackPane.getChildren().add(button);
+		stackPane.getChildren().add(rollDiceButton);
 		
 		return stackPane;
 	}
 	
-	public void setLabelPlayer(Player player) {
-		label.setText("Ruch gracza: " + player.getId());
-	}
-	
-	private Button setRollDiceButton() {
+	private Button getRollDiceButton() {
 		Button button = new RollDiceButton(moveController);
 		return button;
 	}

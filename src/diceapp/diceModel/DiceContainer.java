@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DiceContainer {
-	private Dice[] dices;
+	private final Dice[] dices;
 	private List<DiceResult> result;
 	
 	public DiceContainer(int numberOfDices) {

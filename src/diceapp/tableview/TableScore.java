@@ -10,12 +10,12 @@ import diceapp.score.PlayerScore;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.GridPane;
 
-public class Table {
+public class TableScore {
 	private GridPane table;
 	private GridPane firstTable;
 	private List<TableScoreController> controllers;
 	
-	public Table(List<PlayerScore> score, MoveController move, DiceContainer diceContainer) {
+	public TableScore(List<PlayerScore> score, MoveController move, DiceContainer diceContainer) {
 		
 		table = new GridPane();
 		controllers = new ArrayList<TableScoreController>();
