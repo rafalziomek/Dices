@@ -1,6 +1,10 @@
 package diceapp.controllers;
 
+
+import java.util.List;
+
 import diceapp.diceModel.DiceContainer;
+import diceapp.diceModel.DiceResult;
 import diceapp.dicesView.DiceContainerView;
 import javafx.scene.layout.GridPane;
 public class DiceContainerController {
@@ -41,5 +45,9 @@ public class DiceContainerController {
 	
 	public GridPane getDiceResultView() {
 		return diceContainerView.getDiceResultView();
+	}
+	
+	public List<DiceResult> getResult() {
+		return diceContainer.getTopOfDices();
 	}
 }

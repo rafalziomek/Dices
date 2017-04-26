@@ -3,11 +3,11 @@ package diceapp.tableview;
 
 
 import diceapp.controllers.MoveController;
-import diceapp.diceModel.DiceContainer;
+import diceapp.labels.TableScoreLabels;
+import diceapp.listeners.SaveScoreListener;
 import diceapp.score.PlayerScore;
+import diceapp.score.PlayerScoreUpdater;
 import diceapp.strategies.StrategyType;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -65,85 +65,41 @@ public class TableScoreColumnView extends TableColumnView {
     @FXML
     private Label tableScore;
 	    
-	private PlayerScore playerScore;
-	private MoveController moveController;
-	private DiceContainer diceContainer;
 	
-	public TableScoreColumnView(PlayerScore playerScore, MoveController move, DiceContainer diceContainer) {
+	private SaveScoreListener saveScoreListener;
+	
+	public TableScoreColumnView(PlayerScore playerScore, MoveController move) {
 		super("resources/playerScore.fxml");
 		
-		this.moveController = move;
-		this.playerScore = playerScore;
-		this.diceContainer = diceContainer;
+		int tableId = playerScore.getTableScoreId();
 		
-		setColumnHeader();
+		TableScoreLabels scoreLabels = new TableScoreLabels(firstTableScore, secondTableScore, tableScore);
+		PlayerScoreUpdater scoreUpdater = new PlayerScoreUpdater(playerScore, move, scoreLabels);
+		saveScoreListener = new SaveScoreListener(scoreUpdater, move);
+		
+		setColumnHeader(tableId);
 		
 		initializeListeners();
 	}
 	
-	private void addListenerScoreUpdate(CheckBox strategyCheckBox, StrategyType strategy) {
-		strategyCheckBox
-			.selectedProperty()
-			.addListener(new ChangeListener<Boolean>() {
-		        public void changed(ObservableValue<? extends Boolean> ov,
-		            Boolean old_val, Boolean new_val) {
-		        		if(thisPlayerIsOnMove()) {
-		        			acceptMove(strategyCheckBox, strategy);
-		        		} else {
-		        			dontAcceptMove(strategyCheckBox);
-		        		}
-		        }
-			});
-	}
-	
-	private boolean thisPlayerIsOnMove() {
-		return this.playerScore.getTableScoreId() == this.moveController.getPlayerOnMove().getId();
-	}
-	
-	private void acceptMove(CheckBox checkBox, StrategyType strategy) {
-		checkBox.setDisable(true);
-		saveScore(strategy);
-        updateViewScore(checkBox);
-        updateScores(this.playerScore);
-        this.moveController.move();
-	}
-	
-	private void dontAcceptMove(CheckBox checkBox) {
-		checkBox.selectedProperty().set(false);
-	}
-	
-	private void saveScore(StrategyType strategy) {
-		this.playerScore.saveScore(strategy, this.diceContainer.getTopOfDices());
-	}
-	
-	private void updateViewScore(CheckBox checkBox) {
-		checkBox.setText(Integer.toString(this.playerScore.getLastScore()));
-	}
-	
-	private void updateScores(PlayerScore playerScore) {
-		firstTableScore.setText(Integer.toString(playerScore.getFirstTableScore()));
-        secondTableScore.setText(Integer.toString(playerScore.getSecondTableScore()));
-        tableScore.setText(Integer.toString(playerScore.getScore()));
-	}
-	
-	private void setColumnHeader() {
-		playerName.setText("#" + playerScore.getTableScoreId());
+	private void setColumnHeader(int tableId) {
+		playerName.setText("#" + tableId);
 	}
 	
 	private void initializeListeners() {
-		addListenerScoreUpdate(playerOnes, StrategyType.Ones );
-		addListenerScoreUpdate(playerTwos, StrategyType.Twos);
-		addListenerScoreUpdate(playerThrees, StrategyType.Threes);
-		addListenerScoreUpdate(playerFours, StrategyType.Fours);
-		addListenerScoreUpdate(playerFives, StrategyType.Fives);
-		addListenerScoreUpdate(playerSixes, StrategyType.Sixes);
-		addListenerScoreUpdate(playerThreeSame, StrategyType.ThreeTheSame);
-		addListenerScoreUpdate(playerFourSame, StrategyType.FourTheSame);
-		addListenerScoreUpdate(playerFull, StrategyType.Full);
-		addListenerScoreUpdate(playerSmallStraight, StrategyType.SmallStraight);
-		addListenerScoreUpdate(playerBigStraight, StrategyType.BigStraight);
-		addListenerScoreUpdate(playerGeneral, StrategyType.General);
-		addListenerScoreUpdate(playerChance, StrategyType.Chance);
+		saveScoreListener.setListenerScoreUpdate(playerOnes, StrategyType.Ones );
+		saveScoreListener.setListenerScoreUpdate(playerTwos, StrategyType.Twos);
+		saveScoreListener.setListenerScoreUpdate(playerThrees, StrategyType.Threes);
+		saveScoreListener.setListenerScoreUpdate(playerFours, StrategyType.Fours);
+		saveScoreListener.setListenerScoreUpdate(playerFives, StrategyType.Fives);
+		saveScoreListener.setListenerScoreUpdate(playerSixes, StrategyType.Sixes);
+		saveScoreListener.setListenerScoreUpdate(playerThreeSame, StrategyType.ThreeTheSame);
+		saveScoreListener.setListenerScoreUpdate(playerFourSame, StrategyType.FourTheSame);
+		saveScoreListener.setListenerScoreUpdate(playerFull, StrategyType.Full);
+		saveScoreListener.setListenerScoreUpdate(playerSmallStraight, StrategyType.SmallStraight);
+		saveScoreListener.setListenerScoreUpdate(playerBigStraight, StrategyType.BigStraight);
+		saveScoreListener.setListenerScoreUpdate(playerGeneral, StrategyType.General);
+		saveScoreListener.setListenerScoreUpdate(playerChance, StrategyType.Chance);
 	}
 	
 	

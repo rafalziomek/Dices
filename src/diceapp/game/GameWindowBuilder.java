@@ -3,6 +3,7 @@ package diceapp.game;
 import diceapp.buttons.RollDiceButton;
 import diceapp.controllers.DiceContainerController;
 import diceapp.controllers.MoveController;
+import diceapp.dicesView.DiceContainerView;
 import diceapp.labels.PlayerOnMoveLabel;
 import diceapp.tableview.TableScoreView;
 import javafx.geometry.Insets;
@@ -21,9 +22,9 @@ public class GameWindowBuilder {
 	private Label playerOnMoveLabel;
 	private MoveController moveController;
 	
-	public GameWindowBuilder(DiceContainerController diceContainerController, GridPane tableScore, MoveController move) {
+	public GameWindowBuilder(DiceContainerView diceContainerView, GridPane tableScore, MoveController move) {
 		gameWindow = new BorderPane();
-		this.diceResultView = diceContainerController.getDiceResultView();
+		this.diceResultView = diceContainerView.getDiceResultView();
 		this.scoreTable = tableScore;
 		this.moveController = move;
 	}

@@ -1,5 +1,8 @@
 package diceapp.controllers;
 
+import java.util.List;
+
+import diceapp.diceModel.DiceResult;
 import diceapp.game.Game;
 import diceapp.game.GameOver;
 import diceapp.labels.PlayerOnMoveLabel;
@@ -41,7 +44,7 @@ public class MoveController {
 		moveCounter++;
 		int playerOnMoveIndex = moveCounter % numberOfPlayers;
 		playerOnMove = players[playerOnMoveIndex];
-		playerRoundLabel.setPlayerOnMove(playerOnMove);
+		playerRoundLabel.setPlayerOnMoveId(getPlayerOnMoveId());
 		diceContainerController.isFirstMove();
 		diceContainerController.rollAllDices();
 		if(isEndOfGame()) {
@@ -53,7 +56,7 @@ public class MoveController {
 		GameOver gameOver = new GameOver(game);
 		gameOver.endOfGame();
 	}
-	public boolean isEndOfGame() {
+	private boolean isEndOfGame() {
 		return moveCounter == maximumNumberOfMoves;
 	}
 	
@@ -61,7 +64,10 @@ public class MoveController {
 		this.playerRoundLabel = label;
 	}
 	
-	public Player getPlayerOnMove() {
-		return playerOnMove;
+	public int getPlayerOnMoveId() {
+		return playerOnMove.getId();
+	}
+	public List<DiceResult> getResult() {
+		return diceContainerController.getResult();
 	}
 }

@@ -16,12 +16,10 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			
 			Menu menu = new Menu(primaryStage);
 			Scene scene = menu.buildMenu();
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -18,7 +18,7 @@ public class Game {
 	private final Player[] players;
 	private final List<PlayerScore> playerScores;
 	private final BorderPane gameWindow;
-	private final GridPane tableScore;
+	private final GridPane tableScoreView;
 	private final DiceContainerController diceContainerController;
 	private final GameWindowBuilder gameWindowBuilder;
 	private final MoveController moveController;
@@ -27,8 +27,8 @@ public class Game {
 	
 	private Stage primaryStage;
 	public Game(int numberOfPlayers, Stage primaryStage) {
-		
 		this.primaryStage = primaryStage;
+		
 		players = initializePlayers(numberOfPlayers);
 		playerScores = initializePlayerScores(players);
 		
@@ -40,15 +40,18 @@ public class Game {
 		
 		moveController = new MoveController(players, diceContainerController, this);
 		
-		tableScore = new TableScoreView(playerScores, moveController, diceContainer);
+		tableScoreView = new TableScoreView(playerScores, moveController);
 		
-		diceContainerController.rollAllDices();
+		firstRoll();
 		
-		gameWindowBuilder = new GameWindowBuilder(diceContainerController, tableScore, moveController);
+		gameWindowBuilder = new GameWindowBuilder(diceContainerView, tableScoreView, moveController);
 		
 		gameWindow = gameWindowBuilder.buildGameWindow();
 		
 	}	
+	private void firstRoll() {
+		diceContainerController.rollAllDices();
+	}
 	public int getNumberOfPlayers() {
 		return players.length;
 	}

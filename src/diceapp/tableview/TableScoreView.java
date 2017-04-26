@@ -1,6 +1,5 @@
 package diceapp.tableview;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import diceapp.controllers.MoveController;
@@ -9,9 +8,9 @@ import diceapp.score.PlayerScore;
 import javafx.scene.layout.GridPane;
 
 public class TableScoreView extends GridPane {
-	public TableScoreView(List<PlayerScore> score, MoveController moveController, DiceContainer diceContainer) {
+	public TableScoreView(List<PlayerScore> score, MoveController moveController) {
 		initializeFirstColumn();
-		initializeScoreColumns(score, moveController, diceContainer);
+		initializeScoreColumns(score, moveController);
 		this.gridLinesVisibleProperty().set(true);
 	}
 	
@@ -21,9 +20,10 @@ public class TableScoreView extends GridPane {
 	}
 	
 	private void initializeScoreColumns(List<PlayerScore> score, 
-			MoveController moveController, DiceContainer diceContainer) {
+				MoveController moveController) {
 		for(int i = 2; i < 2 + score.size(); i++) {
-			TableColumnView column = new TableScoreColumnView(score.get(i - 2),moveController, diceContainer);
+			TableColumnView column = 
+					new TableScoreColumnView(score.get(i - 2), moveController);
 			this.addColumn(i, column.getColumnView());
 		}
 	}

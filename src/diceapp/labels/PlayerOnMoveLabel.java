@@ -11,14 +11,14 @@ public class PlayerOnMoveLabel extends Label{
 
 	public PlayerOnMoveLabel(MoveController moveController) {
 		moveController.setPlayerRoundLabel(this);
-		this.setPlayerOnMove(moveController.getPlayerOnMove());
+		this.setPlayerOnMoveId(moveController.getPlayerOnMoveId());
 		this.setPadding(new Insets(10,10,10,10));
 		this.setScaleX(1.2);
 		this.setScaleY(1.2);
 		BorderPane.setAlignment(this, Pos.CENTER);
 	}
 	
-	public void setPlayerOnMove(Player player) {
-		this.setText("Ruch gracza: #" + player.getId());
+	public void setPlayerOnMoveId(int playerOnMoveId) {
+		this.setText("Ruch gracza: #" + playerOnMoveId);
 	}
 }

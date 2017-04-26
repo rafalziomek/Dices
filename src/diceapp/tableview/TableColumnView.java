@@ -6,9 +6,9 @@ public abstract class TableColumnView {
 	private GridPane column;
 	
 	public TableColumnView(String filePath) {
-		ViewLoader loader = new ViewLoader(this, filePath);
-		loader.loadFXML();
-		column = loader.getColumn();
+		ViewLoader viewLoader = new ViewLoader(this, filePath);
+		viewLoader.loadFXML();
+		column = viewLoader.getColumn();
 	}
 	
 	public GridPane getColumnView() {
