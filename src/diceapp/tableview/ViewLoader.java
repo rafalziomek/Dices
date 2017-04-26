@@ -5,12 +5,12 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.GridPane;
 
-public class Loader {
+public class ViewLoader {
 	private GridPane column;
-	private TableColumn tableColumn;
+	private TableColumnView tableColumn;
 	private String filePath;
 	
-	public Loader(TableColumn tableColumn, String filePath) {
+	public ViewLoader(TableColumnView tableColumn, String filePath) {
 		this.filePath = filePath;
 		this.tableColumn = tableColumn;
 		column = new GridPane();

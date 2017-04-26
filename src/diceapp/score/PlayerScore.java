@@ -1,96 +1,77 @@
 package diceapp.score;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import diceapp.diceModel.DiceResult;
 import diceapp.player.Player;
-import diceapp.strategies.Strategy;
-import diceapp.strategies.StrategyFactory;
-import diceapp.strategies.StrategyType;
-import diceapp.strategies.firstTableStrategies.FirstTableStrategy;
-import diceapp.strategies.secondTableStrategies.SecondTableStrategy;
-
+import diceapp.strategies.*;
 
 public class PlayerScore {
-	private int id;
-	private int firstTableScore;
-	private int secondTableScore;
-	private Map<Strategy, Boolean> usedStrategy;
-	private StrategyFactory strategyFactory;
-	private int lastPoints;
+	private final int id;
+	private final TableScore firstTableScore;
+	private final TableScore secondTableScore;
+	private final StrategyFactory strategyFactory;
+	private int lastScore;
+	
 	public PlayerScore(Player player) {
-		firstTableScore = 0;
-		secondTableScore = 0;
 		id = player.getId();
-		usedStrategy = new HashMap<Strategy, Boolean>();
 		strategyFactory = new StrategyFactory();
+		firstTableScore = new FirstTableScore();
+		secondTableScore = new SecondTableScore();
 	}
 	
 	public void saveScore(StrategyType strategyType, List<DiceResult> result) {
 		Strategy strategy = strategyFactory.getStrategy(strategyType);
-		if(isFirstStrategy(strategyType)) {
-			FirstTableStrategy firstTableStrategy = (FirstTableStrategy) strategy;
-			saveFirstTableScore(firstTableStrategy, result);
+		
+		if(strategyFactory.isFirstStrategy(strategyType)) {
+			saveTableScore(firstTableScore, strategy, result);
 		}
 		else {
-			SecondTableStrategy secondTableStrategy = (SecondTableStrategy) strategy;
-			saveSecondTableScore(secondTableStrategy, result);
+			saveTableScore(secondTableScore, strategy, result);
 		}
 	}
 	
-	private boolean isFirstStrategy(StrategyType strategyType) {
-		return Arrays
-				.stream(StrategyType.firstTableStrategies())
-				.anyMatch(p -> p == strategyType);
-	}
-	
-	private void saveFirstTableScore(FirstTableStrategy strategy, List<DiceResult> result) {
-		if(!strategyIsUsed(strategy)) {
-			firstTableScore += strategy.getPoints(result);
-			lastPoints = strategy.getPoints(result);
-			usedStrategy.put(strategy, true);
-		}
-		if(firstTableScore >= 63) {
-			firstTableScore += 25;
-		}
-	}
-	
-	private void saveSecondTableScore(SecondTableStrategy strategy, List<DiceResult> result) {
-		if(!strategyIsUsed(strategy)) {
-			secondTableScore += strategy.getPoints(result);
-			lastPoints = strategy.getPoints(result);
-			usedStrategy.put(strategy, true);
-		}
+	private void saveTableScore(TableScore tableScore, Strategy strategy, List<DiceResult> result) {
+		tableScore.saveTableScore(strategy, result);
+		lastScore = tableScore.getLastScore();
 	}
 	
 	public int getLastScore() {
-		return lastPoints;
-	}
-	
-	private boolean strategyIsUsed(Strategy strategy) {
-		return usedStrategy.keySet()
-				.stream()
-				.anyMatch(p -> p.getClass() == strategy.getClass());
+		return lastScore; 
 	}
 	
 	public int getFirstTableScore() {
-		return firstTableScore;
+		return firstTableScore.getScore();
 	}
 	
 	public int getScore() {
-		return firstTableScore + secondTableScore;
+		return firstTableScore.getScore() + secondTableScore.getScore();
 	}
 	
 	public int getSecondTableScore() {
-		return secondTableScore;
+		return secondTableScore.getScore();
 	}
 	
 	public int getTableScoreId(){
 		return id;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PlayerScore other = (PlayerScore) obj;
+		if (getScore() != other.getScore())
+			return false;
+		return true;
+	}
+
+	
+	
 	
 	
 	

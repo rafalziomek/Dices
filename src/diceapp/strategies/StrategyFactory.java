@@ -1,5 +1,7 @@
 package diceapp.strategies;
 
+import java.util.Arrays;
+
 import diceapp.strategies.firstTableStrategies.FirstTableFiveStrategy;
 import diceapp.strategies.firstTableStrategies.FirstTableFourStrategy;
 import diceapp.strategies.firstTableStrategies.FirstTableOneStrategy;
@@ -46,6 +48,12 @@ public class StrategyFactory {
 			return new SecondTableChanceStrategy();
 		}
 		return null;
+	}
+	
+	public boolean isFirstStrategy(StrategyType strategyType) {
+		return Arrays
+				.stream(StrategyType.firstTableStrategies())
+				.anyMatch(p -> p == strategyType);
 	}
 
 }

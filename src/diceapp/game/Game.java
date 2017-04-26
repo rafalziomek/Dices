@@ -9,7 +9,7 @@ import diceapp.diceModel.DiceContainer;
 import diceapp.dicesView.DiceContainerView;
 import diceapp.player.Player;
 import diceapp.score.PlayerScore;
-import diceapp.tableview.TableScore;
+import diceapp.tableview.TableScoreView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -40,7 +40,7 @@ public class Game {
 		
 		moveController = new MoveController(players, diceContainerController, this);
 		
-		tableScore = new TableScore(playerScores, moveController, diceContainer);
+		tableScore = new TableScoreView(playerScores, moveController, diceContainer);
 		
 		diceContainerController.rollAllDices();
 		

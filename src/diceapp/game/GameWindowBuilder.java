@@ -4,7 +4,7 @@ import diceapp.buttons.RollDiceButton;
 import diceapp.controllers.DiceContainerController;
 import diceapp.controllers.MoveController;
 import diceapp.labels.PlayerOnMoveLabel;
-import diceapp.tableview.TableScore;
+import diceapp.tableview.TableScoreView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

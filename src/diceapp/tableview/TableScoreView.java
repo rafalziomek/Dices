@@ -8,22 +8,22 @@ import diceapp.diceModel.DiceContainer;
 import diceapp.score.PlayerScore;
 import javafx.scene.layout.GridPane;
 
-public class TableScore extends GridPane {
-	public TableScore(List<PlayerScore> score, MoveController moveController, DiceContainer diceContainer) {
+public class TableScoreView extends GridPane {
+	public TableScoreView(List<PlayerScore> score, MoveController moveController, DiceContainer diceContainer) {
 		initializeFirstColumn();
 		initializeScoreColumns(score, moveController, diceContainer);
 		this.gridLinesVisibleProperty().set(true);
 	}
 	
 	private void initializeFirstColumn() {
-		TableColumn firstTableColumn = new TableFirstColumn();
+		TableColumnView firstTableColumn = new TableFirstColumnView();
 		this.addColumn(1, firstTableColumn.getColumnView());
 	}
 	
 	private void initializeScoreColumns(List<PlayerScore> score, 
 			MoveController moveController, DiceContainer diceContainer) {
 		for(int i = 2; i < 2 + score.size(); i++) {
-			TableColumn column = new TableScoreColumn(score.get(i - 2),moveController, diceContainer);
+			TableColumnView column = new TableScoreColumnView(score.get(i - 2),moveController, diceContainer);
 			this.addColumn(i, column.getColumnView());
 		}
 	}

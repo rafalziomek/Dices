@@ -12,7 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 
-public class TableScoreColumn extends TableColumn {
+public class TableScoreColumnView extends TableColumnView {
 	
 	@FXML
 	private Label playerName;
@@ -69,7 +69,7 @@ public class TableScoreColumn extends TableColumn {
 	private MoveController moveController;
 	private DiceContainer diceContainer;
 	
-	public TableScoreColumn(PlayerScore playerScore, MoveController move, DiceContainer diceContainer) {
+	public TableScoreColumnView(PlayerScore playerScore, MoveController move, DiceContainer diceContainer) {
 		super("resources/playerScore.fxml");
 		
 		this.moveController = move;
