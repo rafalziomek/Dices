@@ -17,7 +17,7 @@ public abstract class FirstTableStrategy implements Strategy {
 	@Override
 	public int getPoints(List<DiceResult> results) {
 		ResultStatistics resultStat = new ResultStatistics(results);
-		Map<DiceResult, Integer> map = resultStat.counts();
+		Map<DiceResult, Integer> map = resultStat.getDiceResultOccurences();
 		int points = map.get(diceResult)*diceResult.getValue();
 		return points;
 	}

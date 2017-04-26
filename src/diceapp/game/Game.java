@@ -59,9 +59,11 @@ public class Game {
 	public BorderPane getGameWindow() {
 		return gameWindow;
 	}
+	
 	public void close() {
 		primaryStage.close();
 	}
+	
 	private Player[] initializePlayers(int numberOfPlayers) {
 		Player[] players = new Player[numberOfPlayers];
 		for(int i = 0; i < numberOfPlayers; i++) {

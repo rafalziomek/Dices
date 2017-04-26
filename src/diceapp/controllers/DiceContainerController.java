@@ -10,26 +10,26 @@ import javafx.scene.layout.GridPane;
 public class DiceContainerController {
 	private final DiceContainerView diceContainerView;
 	private final DiceContainer diceContainer;
-	private boolean isFirstMove;
+	private boolean isFirstRoll;
 	
 	public DiceContainerController(DiceContainerView diceContainerView, 
 			DiceContainer diceContainer) {
 		this.diceContainer = diceContainer;
 		this.diceContainerView = diceContainerView;
-		isFirstMove = true;
+		isFirstRoll = true;
 	}
 	
 	public void rollAllDices() {
-		 if(isFirstMove) {
+		 if(isFirstRoll) {
 			 firstRoll();
-			 isFirstMove = false;
+			 isFirstRoll = false;
 		 } else {
 			 nextRoll();
 		 }
 	}
 	
 	public void isFirstMove() {
-		isFirstMove = true;
+		isFirstRoll = true;
 	}
 	
 	private void firstRoll() {

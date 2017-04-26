@@ -22,8 +22,7 @@ public class PlayerScore {
 	
 	public void saveScore(StrategyType strategyType, List<DiceResult> result) {
 		Strategy strategy = strategyFactory.getStrategy(strategyType);
-		
-		if(strategyFactory.isFirstStrategy(strategyType)) {
+		if(StrategyType.isFirstStrategy(strategyType)) {
 			saveTableScore(firstTableScore, strategy, result);
 		}
 		else {

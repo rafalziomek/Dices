@@ -14,15 +14,21 @@ public class ResultStatistics {
 		this.result = result;
 	}
 	
-	public Map<DiceResult, Integer> counts() {
-		Map<DiceResult, Integer> map = new HashMap<DiceResult, Integer>();
+	public Map<DiceResult, Integer> getDiceResultOccurences() {
+		Map<DiceResult, Integer> diceResultOccurences = new HashMap<DiceResult, Integer>();
 		for(int j = 0; j < 6; j++) {
-			int counts = (int) result.stream().filter(intEquals(j+1)).count();
-			map.put(DiceResult.values()[j], counts);
+			
+			int diceResultToCheck = j + 1;
+			int counts = getNumberOfOccurences(diceResultToCheck);
+			diceResultOccurences.put(DiceResult.values()[j], counts);
 		}
-		return map;
+		return diceResultOccurences;
 	}
-	private Predicate<DiceResult> intEquals(int j) {
+	
+	private int getNumberOfOccurences(int diceResultToCheck) {
+		return (int) result.stream().filter(diceResultEquals(diceResultToCheck)).count();
+	}
+	private Predicate<DiceResult> diceResultEquals(int j) {
 		return  p -> p.getValue() == j;
 	}
 }

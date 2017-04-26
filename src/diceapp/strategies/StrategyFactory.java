@@ -50,10 +50,6 @@ public class StrategyFactory {
 		return null;
 	}
 	
-	public boolean isFirstStrategy(StrategyType strategyType) {
-		return Arrays
-				.stream(StrategyType.firstTableStrategies())
-				.anyMatch(p -> p == strategyType);
-	}
+	
 
 }

@@ -1,5 +1,7 @@
 package diceapp.strategies;
 
+import java.util.Arrays;
+
 public enum StrategyType {
 	Ones,
 	Twos,
@@ -36,5 +38,11 @@ public enum StrategyType {
 				StrategyType.General,
 				StrategyType.Chance
 		};
+	}
+	
+	public static boolean isFirstStrategy(StrategyType strategyType) {
+		return Arrays
+				.stream(StrategyType.firstTableStrategies())
+				.anyMatch(p -> p == strategyType);
 	}
 }

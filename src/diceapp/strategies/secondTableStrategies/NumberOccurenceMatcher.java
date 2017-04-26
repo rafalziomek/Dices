@@ -17,7 +17,7 @@ public class NumberOccurenceMatcher {
 	
 	private static boolean getOccurence(List<DiceResult> results, int numberOfSame, Predicate<? super Integer> predicate) {
 		ResultStatistics resultStat = new ResultStatistics(results);
-		Map<DiceResult, Integer> map = resultStat.counts();
+		Map<DiceResult, Integer> map = resultStat.getDiceResultOccurences();
 		boolean theSame = map.values().stream().anyMatch(predicate);
 		return theSame;
 	}

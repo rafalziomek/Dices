@@ -11,6 +11,7 @@ public class SaveScoreListener {
 	
 	private MoveController moveController;
 	private PlayerScoreUpdater playerScoreUpdater;
+	
 	public SaveScoreListener(PlayerScoreUpdater scoreUpdater, MoveController moveController) {
 		this.playerScoreUpdater = scoreUpdater;
 		this.moveController = moveController;
@@ -38,7 +39,7 @@ public class SaveScoreListener {
 	private void acceptMove(CheckBox checkBox, StrategyType strategy) {
 		checkBox.setDisable(true);
 		playerScoreUpdater.update(strategy, checkBox);
-        moveController.move();
+        moveController.moveIsDone();
 	}
 	
 	private void dontAcceptMove(CheckBox checkBox) {

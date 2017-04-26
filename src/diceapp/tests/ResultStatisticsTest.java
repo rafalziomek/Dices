@@ -29,7 +29,7 @@ public class ResultStatisticsTest {
 	}
 	@Test
 	public void testCounter() {
-		Map<DiceResult, Integer> map = stat.counts();
+		Map<DiceResult, Integer> map = stat.getDiceResultOccurences();
 		Map<DiceResult, Integer> mapToCheck = new HashMap<DiceResult, Integer>();
 		mapToCheck.put(DiceResult.One, 3);
 		mapToCheck.put(DiceResult.Two, 0);

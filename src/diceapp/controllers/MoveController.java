@@ -30,8 +30,26 @@ public class MoveController {
 		this.numberOfPlayers = players.length;
 		maximumNumberOfMoves = numberOfPlayers * 13;
 	}
-	public boolean playerCanRoll() {
-		return numberOfRolls < 2;
+	
+	public void moveIsDone() {
+		numberOfRolls = 0;
+		moveCounter++;
+		nextPlayerMove();
+		prepareDicesForNextPlayer();
+		if(isEndOfGame()) {
+			endGame();
+		}
+	}
+	
+	private void nextPlayerMove() {
+		int playerOnMoveIndex = moveCounter % numberOfPlayers;
+		playerOnMove = players[playerOnMoveIndex];
+		playerRoundLabel.setPlayerOnMoveId(getPlayerOnMoveId());
+	}
+	
+	private void prepareDicesForNextPlayer() {
+		diceContainerController.isFirstMove();
+		diceContainerController.rollAllDices();
 	}
 	
 	public void rollAllDices() {
@@ -39,18 +57,6 @@ public class MoveController {
 		numberOfRolls++;
 	}
 	
-	public void move() {
-		numberOfRolls = 0;
-		moveCounter++;
-		int playerOnMoveIndex = moveCounter % numberOfPlayers;
-		playerOnMove = players[playerOnMoveIndex];
-		playerRoundLabel.setPlayerOnMoveId(getPlayerOnMoveId());
-		diceContainerController.isFirstMove();
-		diceContainerController.rollAllDices();
-		if(isEndOfGame()) {
-			endGame();
-		}
-	}
 	
 	private void endGame() {
 		GameOver gameOver = new GameOver(game);
@@ -58,6 +64,10 @@ public class MoveController {
 	}
 	private boolean isEndOfGame() {
 		return moveCounter == maximumNumberOfMoves;
+	}
+	
+	public boolean playerCanRoll() {
+		return numberOfRolls < 2;
 	}
 	
 	public void setPlayerRoundLabel(PlayerOnMoveLabel label) {
