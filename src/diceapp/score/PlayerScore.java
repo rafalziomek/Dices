@@ -12,12 +12,12 @@ public class PlayerScore {
 	private final TableScore secondTableScore;
 	private final StrategyFactory strategyFactory;
 	private int lastScore;
-	
 	public PlayerScore(Player player) {
 		id = player.getId();
+		ScoreGeneralUpdater scoreGeneralUpdater = new ScoreGeneralUpdater();
 		strategyFactory = new StrategyFactory();
-		firstTableScore = new FirstTableScore();
-		secondTableScore = new SecondTableScore();
+		firstTableScore = new FirstTableScore(scoreGeneralUpdater);
+		secondTableScore = new SecondTableScore(scoreGeneralUpdater);
 	}
 	
 	public void saveScore(StrategyType strategyType, List<DiceResult> result) {

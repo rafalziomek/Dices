@@ -1,17 +1,16 @@
-package diceapp.score;
+package diceapp.controllers;
 
-import diceapp.controllers.MoveController;
 import diceapp.labels.TableScoreLabels;
+import diceapp.score.PlayerScore;
 import diceapp.strategies.StrategyType;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 
-public class PlayerScoreUpdater {
+public class PlayerScoreController {
 	
 	private PlayerScore playerScore;
 	private MoveController moveController;
 	private TableScoreLabels tableScoreLabels;
-	public PlayerScoreUpdater(PlayerScore playerScore, MoveController moveController, TableScoreLabels scoreLabels) {
+	public PlayerScoreController(PlayerScore playerScore, MoveController moveController, TableScoreLabels scoreLabels) {
 		this.playerScore = playerScore;
 		this.moveController = moveController;
 		this.tableScoreLabels = scoreLabels;

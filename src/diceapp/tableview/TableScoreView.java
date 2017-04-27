@@ -3,7 +3,6 @@ package diceapp.tableview;
 import java.util.List;
 
 import diceapp.controllers.MoveController;
-import diceapp.diceModel.DiceContainer;
 import diceapp.score.PlayerScore;
 import javafx.scene.layout.GridPane;
 

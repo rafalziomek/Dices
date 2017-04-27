@@ -1,7 +1,7 @@
 package diceapp.buttons;
 
 import diceapp.game.Game;
-import diceapp.game.GameCreator;
+import diceapp.game.GameLauncher;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -11,14 +11,14 @@ public class NextGameButton extends Button {
 
 	public NextGameButton(Game lastGame, Stage winnerWindowStage) {
 		this.textProperty().set("Start!");
-		Stage primaryStage = new Stage();
-		GameCreator gameCreator = new GameCreator(primaryStage, 
-				lastGame.getNumberOfPlayers());
 		
 		this.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override 
 		    public void handle(ActionEvent e) {
-		    	gameCreator.create();
+		    	Stage primaryStage = new Stage();
+		    	GameLauncher gameLauncher = new GameLauncher(primaryStage, 
+						lastGame.getNumberOfPlayers());
+		    	gameLauncher.startGame();
 		    	lastGame.close();
 		    	winnerWindowStage.close();
 		    }

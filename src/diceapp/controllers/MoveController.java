@@ -62,6 +62,7 @@ public class MoveController {
 		GameOver gameOver = new GameOver(game);
 		gameOver.endOfGame();
 	}
+	
 	private boolean isEndOfGame() {
 		return moveCounter == maximumNumberOfMoves;
 	}
@@ -77,6 +78,7 @@ public class MoveController {
 	public int getPlayerOnMoveId() {
 		return playerOnMove.getId();
 	}
+	
 	public List<DiceResult> getResult() {
 		return diceContainerController.getResult();
 	}

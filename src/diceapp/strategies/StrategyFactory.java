@@ -1,6 +1,5 @@
 package diceapp.strategies;
 
-import java.util.Arrays;
 
 import diceapp.strategies.firstTableStrategies.FirstTableFiveStrategy;
 import diceapp.strategies.firstTableStrategies.FirstTableFourStrategy;

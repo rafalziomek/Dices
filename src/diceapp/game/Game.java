@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 public class Game {
 	private final Player[] players;
 	private final List<PlayerScore> playerScores;
+	
 	private final BorderPane gameWindow;
 	private final GridPane tableScoreView;
 	private final DiceContainerController diceContainerController;
@@ -52,6 +53,7 @@ public class Game {
 	private void firstRoll() {
 		diceContainerController.rollAllDices();
 	}
+	
 	public int getNumberOfPlayers() {
 		return players.length;
 	}

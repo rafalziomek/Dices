@@ -11,10 +11,7 @@ import org.junit.Test;
 import diceapp.diceModel.DiceResult;
 import diceapp.player.Player;
 import diceapp.score.PlayerScore;
-import diceapp.strategies.Strategy;
 import diceapp.strategies.StrategyType;
-import diceapp.strategies.firstTableStrategies.FirstTableThreeStrategy;
-import diceapp.strategies.secondTableStrategies.staticStrategies.SecondTableGeneralStrategy;
 
 public class PlayerScoreTest {
 	private Player player;
@@ -30,6 +27,7 @@ public class PlayerScoreTest {
 		testFirstTableScore();
 		testSecondTableScore();
 		testAbove63();
+		testMoreGeneralOccurences();
 	}
 	//Example game of one player with results
 	private void testFirstTableScore() {
@@ -131,6 +129,36 @@ public class PlayerScoreTest {
 		result.add(DiceResult.Three);
 		
 		testScore(StrategyType.Threes, result, 119);
+	}
+	
+	private void testMoreGeneralOccurences() {
+		playerScore = new PlayerScore(player);
+		result = new ArrayList<DiceResult>();
+		result.add(DiceResult.Six);
+		result.add(DiceResult.Six);
+		result.add(DiceResult.Six);
+		result.add(DiceResult.Six);
+		result.add(DiceResult.Six);
+		
+		testScore(StrategyType.General, result, 50);
+	
+		result = new ArrayList<DiceResult>();
+		result.add(DiceResult.Five);
+		result.add(DiceResult.Five);
+		result.add(DiceResult.Five);
+		result.add(DiceResult.Five);
+		result.add(DiceResult.Five);
+		
+		testScore(StrategyType.Fives, result, 175);
+		
+		result = new ArrayList<DiceResult>();
+		result.add(DiceResult.Two);
+		result.add(DiceResult.Two);
+		result.add(DiceResult.Two);
+		result.add(DiceResult.Two);
+		result.add(DiceResult.Two);
+		
+		testScore(StrategyType.SmallStraight, result, 275);
 	}
 	
 	private void testFirstTableScore(StrategyType strategyType, List<DiceResult> result, int expected) {

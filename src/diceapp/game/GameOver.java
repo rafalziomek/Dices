@@ -1,10 +1,7 @@
 package diceapp.game;
 
 
-import diceapp.Main;
 import diceapp.buttons.NextGameButton;
-import diceapp.buttons.StartGameButton;
-import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

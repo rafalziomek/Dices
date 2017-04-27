@@ -1,7 +1,7 @@
 package diceapp.listeners;
 
 import diceapp.controllers.MoveController;
-import diceapp.score.PlayerScoreUpdater;
+import diceapp.controllers.PlayerScoreController;
 import diceapp.strategies.StrategyType;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -10,9 +10,9 @@ import javafx.scene.control.CheckBox;
 public class SaveScoreListener {
 	
 	private MoveController moveController;
-	private PlayerScoreUpdater playerScoreUpdater;
+	private PlayerScoreController playerScoreUpdater;
 	
-	public SaveScoreListener(PlayerScoreUpdater scoreUpdater, MoveController moveController) {
+	public SaveScoreListener(PlayerScoreController scoreUpdater, MoveController moveController) {
 		this.playerScoreUpdater = scoreUpdater;
 		this.moveController = moveController;
 	}

@@ -4,22 +4,20 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class GameCreator {
+public class GameLauncher {
 	private Game game;
 	private Stage primaryStage;
-	public GameCreator(Stage primaryStage, int numberOfPlayers) {
-	    game = new Game(numberOfPlayers, primaryStage);
+	private int numberOfPlayers;
+	public GameLauncher(Stage primaryStage, int numberOfPlayers) {
+	    this.numberOfPlayers = numberOfPlayers;
 	    this.primaryStage = primaryStage;
 	}
 	
-	public void create() {
+	public void startGame() {
+		game = new Game(numberOfPlayers, primaryStage);
 		BorderPane gameWindow = game.getGameWindow();
 		Scene scene = new Scene(gameWindow);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-	}
-	
-	public void close() {
-		primaryStage.close();
 	}
 }

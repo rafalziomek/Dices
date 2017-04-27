@@ -3,10 +3,10 @@ package diceapp.tableview;
 
 
 import diceapp.controllers.MoveController;
+import diceapp.controllers.PlayerScoreController;
 import diceapp.labels.TableScoreLabels;
 import diceapp.listeners.SaveScoreListener;
 import diceapp.score.PlayerScore;
-import diceapp.score.PlayerScoreUpdater;
 import diceapp.strategies.StrategyType;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -74,7 +74,7 @@ public class TableScoreColumnView extends TableColumnView {
 		int tableId = playerScore.getTableScoreId();
 		
 		TableScoreLabels scoreLabels = new TableScoreLabels(firstTableScore, secondTableScore, tableScore);
-		PlayerScoreUpdater scoreUpdater = new PlayerScoreUpdater(playerScore, move, scoreLabels);
+		PlayerScoreController scoreUpdater = new PlayerScoreController(playerScore, move, scoreLabels);
 		saveScoreListener = new SaveScoreListener(scoreUpdater, move);
 		
 		setColumnHeader(tableId);

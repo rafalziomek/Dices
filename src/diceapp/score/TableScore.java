@@ -11,8 +11,10 @@ public abstract class TableScore {
 	protected Map<Strategy, Boolean> usedStrategy;
 	protected int score;
 	protected int lastScore;
+	protected ScoreGeneralUpdater scoreGeneralUpdater;
 	
-	public TableScore() {
+	public TableScore(ScoreGeneralUpdater scoreGeneralUpdater) {
+		this.scoreGeneralUpdater = scoreGeneralUpdater;
 		score = 0;
 		usedStrategy = new HashMap<Strategy, Boolean>();
 	}
@@ -24,17 +26,27 @@ public abstract class TableScore {
 			lastScore = points;
 			useStrategy(strategy);
 		}
+		
 	}
 	
-	private void useStrategy(Strategy strategy) {
-		usedStrategy.put(strategy, true);
+	protected void checkNextGeneralAndUpdateScore(Strategy strategy, List<DiceResult> result) {
+		if(scoreGeneralUpdater.nextGeneralOccurence(result, strategy)) {
+			score += 100;
+		}
 	}
+	
 	
 	protected boolean strategyIsUsed(Strategy strategy) {
 		return usedStrategy.keySet()
 				.stream()
 				.anyMatch(p -> p.getClass() == strategy.getClass());
 	}
+	
+	private void useStrategy(Strategy strategy) {
+		usedStrategy.put(strategy, true);
+	}
+	
+	
 	
 	public int getScore() {
 		return score;

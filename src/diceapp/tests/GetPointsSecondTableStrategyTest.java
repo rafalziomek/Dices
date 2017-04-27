@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import diceapp.diceModel.DiceResult;
 import diceapp.strategies.Strategy;
-import diceapp.strategies.firstTableStrategies.FirstTableThreeStrategy;
 import diceapp.strategies.secondTableStrategies.staticStrategies.SecondTableBigStraightStrategy;
 import diceapp.strategies.secondTableStrategies.staticStrategies.SecondTableFullStrategy;
 import diceapp.strategies.secondTableStrategies.staticStrategies.SecondTableGeneralStrategy;
